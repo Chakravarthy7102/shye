@@ -1,9 +1,9 @@
-import Image from 'next/image'
+import Form from "@/components/form";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      Remove intial boilerplate code. Just getting things started.
-    </main>
-  )
+	return (
+		<main className="flex min-h-screen flex-col items-center justify-between bg-zinc-900 text-zinc-400">
+			<Form />
+		</main>
+	);
 }
