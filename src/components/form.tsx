@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { Button, Input, Label } from "@/ui";
+import { getStargazers } from "@/api/github";
 
 export default function Form() {
 	const [accessToken, setAccessToken] = useState<undefined | string>(undefined);
@@ -10,9 +11,16 @@ export default function Form() {
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		if (accessToken && accessToken.length < 10) {
+
+		if (!accessToken || accessToken.length < 10) {
 			alert("Please pass right and valid github access token.");
 		}
+
+		getStargazers(accessToken!)
+			.then((data) => {
+				setData(data);
+			})
+			.catch((err) => console.log(err));
 	}
 
 	return (
@@ -39,8 +47,8 @@ export default function Form() {
 					Request <span className="font-mono text-zinc-500">JSON</span> response
 					will be displayed here below.
 				</h4>
-				<p className="min-h-[8rem] w-full p-3 bg-zinc-700 text-zinc-300 rounded-md">
-					{data}
+				<p className="min-h-[8rem] w-full p-3 bg-zinc-700 text-zinc-300 rounded-md overflow-auto">
+					{JSON.stringify(data, null, 2)}
 				</p>
 				<Button
 					className="bg-zinc-800 px-4 py-2 text-zinc-300 rounded-md w-fit text-sm hover:opacity-70"
