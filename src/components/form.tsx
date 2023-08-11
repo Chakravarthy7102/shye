@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 
-import { Button, Input, Label } from "@/ui";
 import { getStargazers } from "@/api/github";
+import Label from "@/ui/form/label";
+import Input from "@/ui/form/input";
+import Button from "@/ui/button";
 
 export default function Form() {
 	const [accessToken, setAccessToken] = useState<undefined | string>(undefined);
@@ -50,10 +52,7 @@ export default function Form() {
 				<p className="min-h-[8rem] w-full p-3 bg-zinc-700 text-zinc-300 rounded-md overflow-auto">
 					{JSON.stringify(data, null, 2)}
 				</p>
-				<Button
-					className="bg-zinc-800 px-4 py-2 text-zinc-300 rounded-md w-fit text-sm hover:opacity-70"
-					type="submit"
-				>
+				<Button className="rounded-md w-fit" type="submit">
 					Get Data
 				</Button>
 			</form>

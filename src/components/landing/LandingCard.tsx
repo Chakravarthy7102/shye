@@ -1,14 +1,14 @@
-type FeatureCardProps = {
+type LandingCardProps = {
 	title: string;
 	description: string;
 	icon: React.ReactNode;
 };
 
-export default function FeatureCard({
+export default function LandingCard({
 	description,
 	icon,
 	title,
-}: FeatureCardProps) {
+}: LandingCardProps) {
 	return (
 		<div
 			className={

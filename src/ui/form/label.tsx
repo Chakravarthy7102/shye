@@ -6,9 +6,9 @@ type LabelProps = Omit<React.ComponentPropsWithoutRef<"label">, "children"> & {
 };
 
 const Label = forwardRef<HTMLLabelElement, LabelProps>(
-	({ text, required, ...props }, ref) => {
+	({ text, required, ...props }, forwardedRef) => {
 		return (
-			<label ref={ref} {...props} className="py-2 text-zinc-300 w-fit text-sm">
+			<label ref={forwardedRef} {...props} className="py-2 text-zinc-300 w-fit text-sm">
 				{text}
 				{required ? <span>&lowast;</span> : null}
 			</label>

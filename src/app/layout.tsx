@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
 	title: "Shye",
-	description: "Create your private project stars list.",
+	description: "Create your private Github stars list.",
 };
 
 export default function RootLayout({
@@ -15,7 +15,13 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className + " bg-zinc-900"}>{children}</body>
+			<body
+				className={
+					inter.className + " bg-gradient-to-br from-zinc-950 via-zinc-950 to-blue-950 h-screen text-zinc-200"
+				}
+			>
+				{children}
+			</body>
 		</html>
 	);
 }
