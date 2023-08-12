@@ -1,16 +1,23 @@
+"use client";
+
 import { createElement, forwardRef } from "react";
-
 import { VariantProps, cva } from "class-variance-authority";
+import Link, { LinkProps } from "next/link";
 
-const buttonClasses = cva(
-	"inline-flex justify-center gap-3 items-center font-semibold px-4 py-2 rounded-md hover:opacity-80 ",
+import classNames from "@/utils/className";
+
+const button = cva(
+	[
+		"inline-flex justify-center gap-3 items-center",
+		"font-semibold px-4 py-2 rounded-md hover:opacity-90 disabled:cursor-not-allowed",
+	],
 	{
 		variants: {
 			color: {
 				primary: "bg-zinc-200 text-zinc-900 shadow-md shadow-zinc-500",
 				secondary: "bg-zinc-900 text-zinc-200 shadow-md shadow-zinc-800",
 			},
-			fullWidth: {
+			full: {
 				true: "w-full",
 			},
 			size: {
@@ -21,38 +28,41 @@ const buttonClasses = cva(
 		},
 		defaultVariants: {
 			color: "primary",
-			fullWidth: false,
+			full: false,
 			size: "md",
 		},
 	}
 );
 
-type InferredVariantProps = VariantProps<typeof buttonClasses>;
+type InferredVariantProps = VariantProps<typeof button>;
 
-export type ButtonProps = Omit<JSX.IntrinsicElements["button"], "ref"> &
-	Omit<JSX.IntrinsicElements["a"], "ref"> &
-	InferredVariantProps & {
-		href?: string;
-	};
+export type ButtonProps = (
+	| (Omit<JSX.IntrinsicElements["button"], "ref"> & {
+			href?: undefined;
+	  })
+	| (Omit<JSX.IntrinsicElements["a"], "ref" | "href"> & LinkProps)
+) &
+	InferredVariantProps;
 
-const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-	({ children, ...props }, forwardedRef) => {
-		const { className, color, size, fullWidth } = props;
-		const element = props.href !== undefined ? "a" : "button";
-
-		return createElement(
-			element,
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+	({ color, size, full, children, ...props }, forwardedRef) => {
+		const elementType = props.href === undefined ? "button" : "a";
+		const element = createElement(
+			elementType,
 			{
 				...props,
-				forwardedRef,
-				className: buttonClasses({
-					color,
-					fullWidth,
-					size,
-					className,
-				}),
+				ref: forwardedRef,
+				className: classNames(button({ color, size, full }), props.className),
 			},
 			children
+		);
+
+		return props.href === undefined ? (
+			element
+		) : (
+			<Link passHref href={props.href} legacyBehavior>
+				{element}
+			</Link>
 		);
 	}
 );

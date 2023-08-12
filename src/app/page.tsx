@@ -59,7 +59,7 @@ export default function Home() {
 					<p className="text-lg text-zinc-300 mt-5">
 						Save and organize your favorite GitHub projects privately.
 					</p>
-					<Button href="/auth" className="mt-5">
+					<Button href="/auth" className="mt-5 inline-flex">
 						Get Started
 					</Button>
 				</div>
