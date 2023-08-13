@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Github } from "@/lib/icons";
 import Button from "@/ui/button";
 import Database from "@/database";
+import { signIn } from "next-auth/react";
 
 type AuthMode = "signin" | "signup";
 
@@ -33,7 +34,7 @@ export function GithubAuth() {
 			<h4 className="text-2xl font-bold">{textConfig[authMode].mainText}</h4>
 			<span className="text-sm m-2">{textConfig[authMode].subText}</span>
 			<Button
-				onClick={handleGithubAuth}
+				onClick={() => signIn("github")}
 				full
 				color="secondary"
 				className="mt-5"
