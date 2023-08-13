@@ -1,10 +1,34 @@
-import * as Schema from "@effect/schema/Schema";
-import * as Evolu from "evolu";
+import { RxDatabase, addRxPlugin, createRxDatabase } from "rxdb";
+import { RxDBDevModePlugin } from "rxdb/plugins/dev-mode";
+import { getRxStorageDexie } from "rxdb/plugins/storage-dexie";
+import { HeroSchema, HeroesCollection } from "./schemas/heros";
 
-import TodoTable from "./schemas/todo";
+addRxPlugin(RxDBDevModePlugin);
 
-const SchemaList = Schema.struct({
-	todo: TodoTable,
-});
+export type DatabaseCollections = {
+	heroes: HeroesCollection;
+};
+export default class Database {
+	private static db: RxDatabase<DatabaseCollections, any, any> | undefined;
 
-export const { useMutation, useQuery } = Evolu.create(SchemaList);
+	static async getDbInstance() {
+		if (this.db === undefined) {
+			this.db = await createRxDatabase<DatabaseCollections>({
+				name: "shyedb",
+				storage: getRxStorageDexie(),
+			});
+
+			console.log("DatabaseService: created database");
+
+			await this.db.addCollections({
+				heroes: {
+					schema: HeroSchema,
+				},
+			});
+
+			console.log("DatabaseService: create collections");
+		}
+
+		return this.db;
+	}
+}
