@@ -1,9 +1,8 @@
-import "./globals.css"
-;
+import "./globals.css";
 import { Session } from "next-auth";
 import { Inter } from "next/font/google";
 
-import Header from "@/components/header";
+import Header from "@/components/navigation/header";
 
 export const metadata = {
 	title: "Shye",

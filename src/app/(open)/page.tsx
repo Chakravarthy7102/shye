@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CheckCircle, Github, Lock, Refresh } from "@/lib/icons";
 import LandingCard, { Counter } from "@/components/landing/LandingCard";
 import Button from "@/ui/button";
+import Footer from "@/components/navigation/footer";
 
 const features = [
 	{
@@ -102,17 +103,7 @@ export default function Home() {
 					</Button>
 				</div>
 			</section>
-			<footer className="flex flex-col py-10 text-center">
-				<div className="flex justify-center mb-2">
-					<Link href="https://github.com/Chakravarthy7102/shye">
-						<Github />
-					</Link>
-				</div>
-				<span>
-					Released under the ISC License. <br /> Copyright &copy;{" "}
-					{new Date().getFullYear()} Shye Contributors.
-				</span>
-			</footer>
+			<Footer />
 		</main>
 	);
 }
