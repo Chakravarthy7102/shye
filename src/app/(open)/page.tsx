@@ -1,6 +1,8 @@
-import { CheckCircle, Github, Lock, Refresh } from "@/components/icons";
-import FeatureCard, { Counter } from "@/components/landing/FeatureCard";
 import Link from "next/link";
+
+import { CheckCircle, Github, Lock, Refresh } from "@/lib/icons";
+import LandingCard, { Counter } from "@/components/landing/LandingCard";
+import Button from "@/ui/button";
 
 const features = [
 	{
@@ -57,9 +59,9 @@ export default function Home() {
 					<p className="text-lg text-zinc-300 mt-5">
 						Save and organize your favorite GitHub projects privately.
 					</p>
-					<button className="bg-zinc-200 text-zinc-900 text-md font-semibold px-4 py-2 rounded-md mt-5 hover:opacity-80 shadow-md shadow-zinc-500">
+					<Button href="/auth" className="mt-5 inline-flex">
 						Get Started
-					</button>
+					</Button>
 				</div>
 			</section>
 			<section className="flex flex-col pb-52">
@@ -69,7 +71,7 @@ export default function Home() {
 					</h2>
 					<div className="grid grid-cols-3 grid-rows-1 gap-5 mt-10">
 						{features.map((feature) => (
-							<FeatureCard {...feature} />
+							<LandingCard {...feature} />
 						))}
 					</div>
 				</div>
@@ -81,7 +83,7 @@ export default function Home() {
 					</h2>
 					<div className="grid grid-cols-3 grid-rows-1 gap-5 mt-10">
 						{steps.map((step) => (
-							<FeatureCard {...step} />
+							<LandingCard {...step} />
 						))}
 					</div>
 				</div>
@@ -95,9 +97,9 @@ export default function Home() {
 						Join our community of developers who are managing their private
 						GitHub stars.
 					</p>
-					<button className="bg-zinc-200 text-zinc-900 text-md font-semibold px-4 py-2 rounded-md mt-5 hover:opacity-80 shadow-md shadow-zinc-500">
+					<Button href="/auth" className="mt-5">
 						Sign Up
-					</button>
+					</Button>
 				</div>
 			</section>
 			<footer className="flex flex-col py-10 text-center">
