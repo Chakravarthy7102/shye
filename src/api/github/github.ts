@@ -14,9 +14,10 @@ export async function getStargazers(
 }
 
 export async function getStarredRepos(
-	accessToken: string
+	accessToken: string,
+	page = 1
 ): Promise<Array<StarredRepository>> {
-	const res = await fetch(BASE_URL + `user/starred`, {
+	const res = await fetch(BASE_URL + `user/starred?page=${page}`, {
 		method: "GET",
 		headers: getDefaultHeader(accessToken),
 	});

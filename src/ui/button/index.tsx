@@ -9,14 +9,14 @@ import classNames from "@/utils/className";
 const button = cva(
 	[
 		"inline-flex justify-center gap-3 items-center",
-		"font-semibold px-4 py-2 rounded-md hover:opacity-90 disabled:cursor-not-allowed",
+		"font-semibold px-4 py-2 rounded-md hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70",
 	],
 	{
 		variants: {
 			color: {
 				primary: "bg-zinc-200 text-zinc-900 shadow-md shadow-zinc-500",
 				secondary: "bg-zinc-900 text-zinc-200 shadow-md shadow-zinc-800",
-				muted: "bg-transperent shadow-none",
+				muted: "bg-transparent shadow-none",
 			},
 			full: {
 				true: "w-full",
