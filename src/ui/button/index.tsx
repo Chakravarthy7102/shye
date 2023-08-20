@@ -16,6 +16,7 @@ const button = cva(
 			color: {
 				primary: "bg-zinc-200 text-zinc-900 shadow-md shadow-zinc-500",
 				secondary: "bg-zinc-900 text-zinc-200 shadow-md shadow-zinc-800",
+				muted: "bg-transperent shadow-none",
 			},
 			full: {
 				true: "w-full",

@@ -1,3 +1,7 @@
+import languageColors from "@/data/colors.json";
+
+export type Languages = keyof typeof languageColors;
+
 export type StarredRepository = {
 	id: number;
 	name: string;
@@ -8,7 +12,7 @@ export type StarredRepository = {
 	description: string;
 	url: string;
 	stargazers_url: string;
-	language: unknown;
+	language: Languages;
 	stargazers_count: number;
 	open_issues_count: number;
 	topics: string[];
@@ -28,7 +32,5 @@ export type GithubUser = {
 	gravatar_id: string;
 	followers_url: string;
 	following_url: string;
-    html_url: string
+	html_url: string;
 };
-
-  

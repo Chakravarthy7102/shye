@@ -8,7 +8,7 @@ export default async function Auth() {
 	const session = await getSession();
 
 	if (session !== null) {
-		redirect("/user");
+		redirect("/stars");
 	}
 
 	return (

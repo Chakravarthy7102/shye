@@ -23,7 +23,7 @@ export default function RootLayout({
 			<body
 				className={
 					inter.className +
-					" bg-gradient-to-br from-zinc-950 via-zinc-950 to-blue-950 h-screen text-zinc-200"
+					" bg-gradient-to-br from-zinc-950 via-zinc-950 to-blue-950 h-screen text-zinc-200 bg-no-repeat bg-fixed"
 				}
 			>
 				{session ? <Header /> : null}
