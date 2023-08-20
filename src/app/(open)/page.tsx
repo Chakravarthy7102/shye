@@ -1,8 +1,8 @@
-import Link from "next/link";
-
-import { CheckCircle, Github, Lock, Refresh } from "@/lib/icons";
+import { CheckCircle, Lock, Refresh } from "@/lib/icons";
 import LandingCard, { Counter } from "@/components/landing/LandingCard";
 import Button from "@/ui/button";
+import Footer from "@/components/navigation/footer";
+import Badge from "@/ui/button/badge";
 
 const features = [
 	{
@@ -50,6 +50,7 @@ export default function Home() {
 		<main className="flex min-h-screen flex-col items-center text-zinc-400 bg-[url('/images/landing/overlay-bg.jpg')] bg-no-repeat bg-cover">
 			<section className="flex justify-between py-72 px-26 items-center">
 				<div className="max-w-8xl mx-auto px-8 text-center">
+					<Badge>Open Source and Local first</Badge>
 					<h1 className="text-7xl text-zinc-200 font-bold max-w-3xl tracking-wide">
 						Your Private GitHub{" "}
 						<span className="bg-gradient-to-r from-zinc-200 via-zinc-400 to-zinc-500 text-transparent bg-clip-text">
@@ -102,17 +103,7 @@ export default function Home() {
 					</Button>
 				</div>
 			</section>
-			<footer className="flex flex-col py-10 text-center">
-				<div className="flex justify-center mb-2">
-					<Link href="https://github.com/Chakravarthy7102/shye">
-						<Github />
-					</Link>
-				</div>
-				<span>
-					Released under the ISC License. <br /> Copyright &copy;{" "}
-					{new Date().getFullYear()} Shye Contributors.
-				</span>
-			</footer>
+			<Footer />
 		</main>
 	);
 }
