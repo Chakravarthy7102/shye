@@ -4,6 +4,7 @@ import AuthContext from "@/context/AuthContext";
 import getSession from "@/utils/getSession";
 
 import RootLayout from "../layout";
+import Footer from "@/components/navigation/footer";
 
 export default async function AuthenticatedLayout({
 	children,
@@ -19,6 +20,7 @@ export default async function AuthenticatedLayout({
 	return (
 		<RootLayout session={session}>
 			<AuthContext session={session}>{children}</AuthContext>
+			<Footer />
 		</RootLayout>
 	);
 }

@@ -14,8 +14,6 @@ export default async function User({
 	const session = await getSession();
 	const page = (searchParams && Number(searchParams.page)) || 1;
 
-	console.log({ searchParams: page });
-
 	if (!session) {
 		redirect("/auth");
 	}
@@ -24,7 +22,7 @@ export default async function User({
 	const reposLength = starredRepos.length;
 
 	return (
-		<section className="max-w-5xl mx-auto">
+		<section className="max-w-5xl mx-auto pt-10">
 			<h1 className="text-3xl font-bold my-5">Stars</h1>
 			{reposLength === 0 ? (
 				<div className="text-center text-2xl font-semibold mt-44">
@@ -33,7 +31,7 @@ export default async function User({
 			) : null}
 			<div className="flex flex-col gap-8 pb-10">
 				{starredRepos.map((repo) => {
-					return <StarredRepoCard {...repo} />;
+					return <StarredRepoCard key={repo.created_at} {...repo} />;
 				})}
 			</div>
 			<Pagination page={page} result={reposLength} />
