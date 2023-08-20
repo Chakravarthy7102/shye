@@ -1,6 +1,5 @@
 import NextAuth, { AuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import { redirect } from "next/navigation";
 
 export const authOptions: AuthOptions = {
 	providers: [
@@ -10,9 +9,9 @@ export const authOptions: AuthOptions = {
 		}),
 	],
 	callbacks: {
-		async signIn({ user, credentials }) {
-			console.log({ user, credentials });
-			return true;
+		async session({ session, token }) {
+			session.user = token
+			return session;
 		},
 	},
 };
