@@ -3,6 +3,7 @@ import { Session } from "next-auth";
 import { Inter } from "next/font/google";
 
 import Header from "@/components/navigation/header";
+import Footer from "@/components/navigation/footer";
 
 export const metadata = {
 	title: "Shye",
@@ -23,10 +24,10 @@ export default function RootLayout({
 			<body
 				className={
 					inter.className +
-					" bg-gradient-to-br from-zinc-950 via-zinc-950 to-blue-950 h-screen text-zinc-200"
+					" bg-gradient-to-br from-zinc-950 via-zinc-950 to-blue-950 h-screen text-zinc-200 bg-no-repeat bg-fixed"
 				}
 			>
-				{session ? <Header /> : null}
+				{session ? <Header session={session} /> : null}
 				{children}
 			</body>
 		</html>

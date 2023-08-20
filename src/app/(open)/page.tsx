@@ -2,7 +2,7 @@ import { CheckCircle, Lock, Refresh } from "@/lib/icons";
 import LandingCard, { Counter } from "@/components/landing/LandingCard";
 import Button from "@/ui/button";
 import Footer from "@/components/navigation/footer";
-import Badge from "@/ui/button/badge";
+import Badge from "@/ui/badge";
 
 const features = [
 	{

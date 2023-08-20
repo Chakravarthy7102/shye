@@ -9,8 +9,15 @@ export const authOptions: AuthOptions = {
 		}),
 	],
 	callbacks: {
+		async jwt({ token, account }) {
+			// Persist the OAuth access_token to the token right after signin
+			if (account && account.access_token) {
+				token.accessToken = account.access_token;
+			}
+			return token;
+		},
 		async session({ session, token }) {
-			session.user = token
+			session.user = token;
 			return session;
 		},
 	},
