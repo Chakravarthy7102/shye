@@ -1,4 +1,4 @@
-import Button from "@/ui/button";
+import CreateListDialog from "./components/CreateListDialog";
 
 export default function Lists() {
 	const lists = [];
@@ -6,7 +6,7 @@ export default function Lists() {
 		<section className="max-w-5xl mx-auto pt-10 h-screen">
 			{lists.length > 0 ? (
 				<div className="flex justify-end">
-					<Button size="sm">Create List</Button>
+					<CreateListDialog />
 				</div>
 			) : null}
 			{lists.length === 0 ? (
@@ -14,7 +14,7 @@ export default function Lists() {
 					<p className="font-semibold text-xl">
 						No lists are found, get started by creating new lists.
 					</p>
-					<Button size="sm">Create List</Button>
+					<CreateListDialog />
 				</div>
 			) : null}
 		</section>
