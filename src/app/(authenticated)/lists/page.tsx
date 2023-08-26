@@ -1,16 +1,38 @@
-import CreateListDialog from "./components/CreateListDialog";
+"use client";
+
+import { useEffect, useState } from "react";
+
+import StarsListCollection, { StarsList } from "@/database/schemas/star-list";
+import CreateListDialog from "./components/dialogs/CreateListDialog";
 
 export default function Lists() {
-	const lists = [];
+	const [lists, setLists] = useState<Omit<StarsList, "repos">[]>([]);
+
+	async function getStarLists() {
+		try {
+			const res = await StarsListCollection.findAll();
+			setLists(res);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
+	useEffect(() => {
+		getStarLists();
+	}, []);
+
 	return (
-		<section className="max-w-5xl mx-auto pt-10 h-screen">
+		<section>
 			{lists.length > 0 ? (
-				<div className="flex justify-end">
-					<CreateListDialog />
+				<div className="h-screen">
+					<div className="flex justify-end">
+						<CreateListDialog />
+					</div>
+					<pre>{JSON.stringify(lists, null, 2)}</pre>
 				</div>
 			) : null}
 			{lists.length === 0 ? (
-				<div className="absolute inset-0 flex flex-col gap-5 justify-center items-center ">
+				<div className="flex flex-col gap-5 justify-center items-center h-[calc(100vh-8rem)] ">
 					<p className="font-semibold text-xl">
 						No lists are found, get started by creating new lists.
 					</p>

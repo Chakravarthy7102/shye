@@ -19,7 +19,9 @@ export default async function AuthenticatedLayout({
 
 	return (
 		<RootLayout session={session}>
-			<AuthContext session={session}>{children}</AuthContext>
+			<AuthContext session={session}>
+				<main className="max-w-5xl mx-auto pt-24">{children}</main>
+			</AuthContext>
 			<Footer />
 		</RootLayout>
 	);

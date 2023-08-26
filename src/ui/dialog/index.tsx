@@ -2,7 +2,6 @@
 
 import { X } from "@/lib/icons";
 import { useRef, useEffect } from "react";
-import Button from "../button";
 
 type Props = {
 	title: string;
@@ -22,21 +21,26 @@ export default function Dialog({
 	const dialogRef = useRef<null | HTMLDialogElement>(null);
 
 	useEffect(() => {
+		const header = document.getElementById("shye-header");
 		if (showDialog === true) {
 			dialogRef.current?.showModal();
+			document.body.style.overflow = "hidden";
+			document.body.style.marginRight = "12px";
 		} else {
 			dialogRef.current?.close();
+			document.body.style.overflow = "auto";
+			document.body.style.marginRight = "0px";
+		}
+
+		if (header) {
+			header.style.paddingRight =
+				showDialog === true ? "calc(2.5rem + 12px)" : "2.5rem";
 		}
 	}, [showDialog]);
 
 	const closeDialog = () => {
 		dialogRef.current?.close();
 		onClose();
-	};
-
-	const clickOk = () => {
-		onOk();
-		closeDialog();
 	};
 
 	const dialog: JSX.Element | null =

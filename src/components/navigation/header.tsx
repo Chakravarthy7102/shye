@@ -1,19 +1,22 @@
 "use client";
 
+import Link from "next/link";
+import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 import Button from "@/ui/button";
-import { Session } from "next-auth";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
 import classNames from "@/utils/className";
+import { resetDatabase } from "@/database/utils/resetDatabase";
 
 export default function Header({ session }: { session: Session }) {
 	const pathname = usePathname();
-	console.log(pathname);
 	return (
-		<header className="flex justify-between px-10 py-5">
+		<header
+			id="shye-header"
+			className="fixed w-full backdrop-blur-md z-50 flex justify-between px-10 py-5"
+		>
 			<div className="flex items-center gap-4">
 				<h2 className="text-2xl font-bold mr-10 bg-gradient-to-br from-zinc-600 via-zinc-300 to-zinc-500 text-transparent bg-clip-text">
 					Shye
@@ -47,6 +50,15 @@ export default function Header({ session }: { session: Session }) {
 				/>
 				<Button size="sm" onClick={() => signOut()}>
 					Sign Out
+				</Button>
+				<Button
+					size="sm"
+					onClick={async () => {
+						await resetDatabase();
+						window.location.reload();
+					}}
+				>
+					Reset Database
 				</Button>
 			</div>
 		</header>

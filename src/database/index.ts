@@ -1,34 +1,18 @@
-import { RxDatabase, addRxPlugin, createRxDatabase } from "rxdb";
-import { RxDBDevModePlugin } from "rxdb/plugins/dev-mode";
-import { getRxStorageDexie } from "rxdb/plugins/storage-dexie";
-import { HeroSchema, HeroesCollection } from "./schemas/heros";
+import Dexie, { Table } from "dexie";
+import { StarsList } from "./schemas/star-list";
+import { StarsListItem } from "./schemas/star-list-item";
 
-addRxPlugin(RxDBDevModePlugin);
+export class ShyeDatabase extends Dexie {
+	starsList!: Table<StarsList, number>;
+	starsListItem!: Table<StarsListItem, number>;
 
-export type DatabaseCollections = {
-	heroes: HeroesCollection;
-};
-export default class Database {
-	private static db: RxDatabase<DatabaseCollections, any, any> | undefined;
-
-	static async getDbInstance() {
-		if (this.db === undefined) {
-			this.db = await createRxDatabase<DatabaseCollections>({
-				name: "shyedb",
-				storage: getRxStorageDexie(),
-			});
-
-			console.log("DatabaseService: created database");
-
-			await this.db.addCollections({
-				heroes: {
-					schema: HeroSchema,
-				},
-			});
-
-			console.log("DatabaseService: create collections");
-		}
-
-		return this.db;
+	constructor() {
+		super("shyeDb");
+		this.version(1).stores({
+			starsList: "++id",
+			starListItem: "++id",
+		});
 	}
 }
+
+export const db = new ShyeDatabase();
