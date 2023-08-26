@@ -15,5 +15,13 @@ export default function useError(autoDisapper = false, duration = 3000) {
 		[autoDisapper]
 	);
 
-	return [error, setError] as const;
+	const ErrorMessage = useCallback(() => {
+		return error ? (
+			<span className="text-red-800 bg-red-500/10 px-4 rounded-md">
+				{error}
+			</span>
+		) : null;
+	}, [error]);
+
+	return [ErrorMessage, setError] as const;
 }

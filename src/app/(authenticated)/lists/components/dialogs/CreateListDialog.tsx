@@ -14,7 +14,7 @@ export default function CreateListDialog() {
 	const [title, setTitle] = useState<string | null>(null);
 	const [description, setDescription] = useState("");
 
-	const [errorMessage, setErrorMessage] = useError(true);
+	const [ErrorMessage, setErrorMessage] = useError(true);
 
 	async function createList(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -63,11 +63,7 @@ export default function CreateListDialog() {
 						fullWidth
 						placeholder="Write a description"
 					/>
-					{errorMessage ? (
-						<span className="text-red-800 bg-red-500/10 px-4 rounded-md">
-							{errorMessage}
-						</span>
-					) : null}
+					<ErrorMessage />
 					<Button
 						role="button"
 						disabled={title === null || title.trim().length < 3}
