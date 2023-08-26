@@ -7,21 +7,28 @@ import Dialog from "@/ui/dialog";
 import Input from "@/ui/form/input";
 import Textarea from "@/ui/form/textarea";
 import StarsListCollection from "@/database/schemas/star-list";
+import useError from "@/hooks/useError";
 
 export default function CreateListDialog() {
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 	const [title, setTitle] = useState<string | null>(null);
 	const [description, setDescription] = useState("");
 
+	const [errorMessage, setErrorMessage] = useError(true);
+
 	async function createList(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
 		if (title && title.trim().length > 3) {
-			await StarsListCollection.create({
-				title,
-				description,
-				reposCount: 0,
-			});
+			try {
+				await StarsListCollection.create({
+					title,
+					description,
+					reposCount: 0,
+				});
+			} catch (err: any) {
+				setErrorMessage(err.message);
+			}
 		} else {
 		}
 	}
@@ -56,6 +63,11 @@ export default function CreateListDialog() {
 						fullWidth
 						placeholder="Write a description"
 					/>
+					{errorMessage ? (
+						<span className="text-red-800 bg-red-500/10 px-4 rounded-md">
+							{errorMessage}
+						</span>
+					) : null}
 					<Button
 						role="button"
 						disabled={title === null || title.trim().length < 3}

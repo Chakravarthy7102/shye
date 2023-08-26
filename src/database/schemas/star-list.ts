@@ -1,4 +1,5 @@
-import { db } from "..";
+import { ErrorCodes } from "@/types";
+import { db } from "../index";
 
 export type StarsList = {
 	id?: number;
@@ -22,7 +23,16 @@ export default class StarsListCollection {
 		return db.starsList.where({ ...filter }).first();
 	}
 
-	public static create(list: StarsList) {
+	public static async create(list: StarsList) {
+		const exists = await db.starsList.where("title").equals(list.title).count();
+
+		if (exists !== 0) {
+			throw {
+				message: `Duplicate title, Please use a diffrent one.`,
+				code: ErrorCodes.ALREADY_EXITS,
+			};
+		}
+
 		return db.starsList.add(list);
 	}
 }
