@@ -14,14 +14,11 @@ export type StarredRepository = {
 	stargazers_url: string;
 	language: Languages;
 	stargazers_count: number;
-	open_issues_count: number;
 	topics: string[];
 	visibility: string;
-	pushed_at: string;
 	created_at: string;
 	updated_at: string;
 	forks: number;
-	open_issues: number;
 	watchers: number;
 };
 

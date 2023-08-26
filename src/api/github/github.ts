@@ -1,5 +1,5 @@
+import { GithubUser, StarredRepository } from "@/types/github";
 import { BASE_URL, getDefaultHeader } from "../config";
-import { GithubUser, StarredRepository } from "./types";
 
 export async function getStargazers(
 	accessToken: string,

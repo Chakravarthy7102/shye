@@ -12,24 +12,25 @@ export default async function User({
 	searchParams?: { [key: string]: string | string[] | undefined };
 }) {
 	const session = await getSession();
-	const page = (searchParams && Number(searchParams.page)) || 1;
 
 	if (!session) {
 		redirect("/auth");
 	}
 
+	const page = (searchParams && Number(searchParams.page)) || 1;
+
 	const starredRepos = await getStarredRepos(session.user.accessToken, page);
 	const reposLength = starredRepos.length;
 
 	return (
-		<section className="max-w-5xl mx-auto pt-10">
-			<h1 className="text-3xl font-bold my-5">Stars</h1>
+		<section>
+			<h1 className="flex gap-3 text-3xl font-bold my-5">Stars</h1>
 			{reposLength === 0 ? (
 				<div className="text-center text-2xl font-semibold mt-44">
 					Not Respositories Found
 				</div>
 			) : null}
-			<div className="flex flex-col gap-8 pb-10">
+			<div className="flex flex-col gap-8 pb-10 px-10">
 				{starredRepos.map((repo) => {
 					return <StarredRepoCard key={repo.created_at} {...repo} />;
 				})}

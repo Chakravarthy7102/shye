@@ -8,7 +8,7 @@ import Button from "@/ui/button";
 export default function StarredRepoCard(repo: StarredRepository) {
 	return (
 		<div className="bg-zinc-950/20 backdrop-blur-md border border-blue-500/20 rounded-xl p-5 space-y-3">
-			<h4 className="text-xl font-semibold text-zinc-200 hover:underline">
+			<h4 className="inline-block text-xl font-semibold text-zinc-200 hover:underline">
 				<Link href={repo.html_url} target="_blank">
 					{repo.owner.login} / {repo.name}
 				</Link>
