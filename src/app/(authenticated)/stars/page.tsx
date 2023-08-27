@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import { getStarredRepos } from "@/api/github/github";
 import getSession from "@/utils/getSession";
 
-import StarredRepoCard from "./components/StarredRepoCard";
-import Pagination from "./components/Pagination";
+import StarredRepoCard from "./_components/StarredRepoCard";
+import Pagination from "./_components/Pagination";
 
 export default async function User({
 	searchParams,
