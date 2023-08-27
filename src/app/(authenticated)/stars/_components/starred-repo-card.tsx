@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { StarredRepository } from "@/api/github/types";
 import languageColors from "@/data/colors.json";
 import { Fork, Star } from "@/lib/icons";
 import Button from "@/ui/button";
+import { StarredRepository } from "@/types/github";
 
 export default function StarredRepoCard(repo: StarredRepository) {
 	return (

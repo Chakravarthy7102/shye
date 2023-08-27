@@ -1,8 +1,9 @@
 "use client";
 
-import CreateListDialog from "./_components/dialogs/CreateListDialog";
+import CreateListDialog from "./_components/dialogs/create-list-dialog";
 import Spinner from "@/components/spinner";
 import { useGetStarLists } from "./_lib";
+import StarList from "./_components/star-list";
 
 export default function Lists() {
 	const { data: lists, isLoading } = useGetStarLists();
@@ -14,11 +15,15 @@ export default function Lists() {
 	return (
 		<section>
 			{lists && lists.length > 0 ? (
-				<div className="h-screen">
+				<div className="h-screen px-10">
 					<div className="flex justify-end">
 						<CreateListDialog />
 					</div>
-					<pre>{JSON.stringify(lists, null, 2)}</pre>
+					<div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-4 mt-24">
+						{lists.map((list) => {
+							return <StarList {...list} />;
+						})}
+					</div>
 				</div>
 			) : null}
 			{lists && lists.length === 0 ? (
