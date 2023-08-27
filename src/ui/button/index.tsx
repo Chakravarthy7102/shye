@@ -5,6 +5,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import Link, { LinkProps } from "next/link";
 
 import classNames from "@/utils/className";
+import { Loader } from "@/lib/icons";
 
 const button = cva(
 	[
@@ -35,7 +36,9 @@ const button = cva(
 	}
 );
 
-type InferredVariantProps = VariantProps<typeof button>;
+type InferredVariantProps = VariantProps<typeof button> & {
+	isLoading?: boolean;
+};
 
 export type ButtonProps = (
 	| (Omit<JSX.IntrinsicElements["button"], "ref"> & {
@@ -48,6 +51,7 @@ export type ButtonProps = (
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	({ color, size, full, children, ...props }, forwardedRef) => {
 		const elementType = props.href === undefined ? "button" : "a";
+
 		const element = createElement(
 			elementType,
 			{
@@ -55,7 +59,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				ref: forwardedRef,
 				className: classNames(button({ color, size, full }), props.className),
 			},
-			children
+			<>
+				{props.isLoading ? (
+					<Loader className="animate-spin h-5 w-5 -mr-2" />
+				) : null}
+				{children}
+			</>
 		);
 
 		return props.href === undefined ? (

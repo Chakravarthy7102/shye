@@ -3,8 +3,10 @@ import { redirect } from "next/navigation";
 import AuthContext from "@/context/AuthContext";
 import getSession from "@/utils/getSession";
 
-import RootLayout from "../layout";
 import Footer from "@/components/navigation/footer";
+import Header from "@/components/navigation/header";
+
+import RootLayout from "../layout";
 
 export default async function AuthenticatedLayout({
 	children,
@@ -20,6 +22,7 @@ export default async function AuthenticatedLayout({
 	return (
 		<RootLayout session={session}>
 			<AuthContext session={session}>
+				<Header session={session} />
 				<main className="max-w-5xl mx-auto pt-24">{children}</main>
 			</AuthContext>
 			<Footer />

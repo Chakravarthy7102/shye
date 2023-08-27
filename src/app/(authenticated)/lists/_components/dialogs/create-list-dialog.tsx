@@ -1,41 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "@/ui/button";
 import Dialog from "@/ui/dialog";
 import Input from "@/ui/form/input";
 import Textarea from "@/ui/form/textarea";
-import StarsListCollection from "@/database/schemas/star-list";
-import useError from "@/hooks/useError";
+import { Plus } from "@/lib/icons";
+import Indicator from "@/ui/indicators";
+
+import { useCreateListMutation } from "../../_lib";
 
 export default function CreateListDialog() {
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
+
 	const [title, setTitle] = useState<string | null>(null);
 	const [description, setDescription] = useState("");
 
-	const [errorMessage, setErrorMessage] = useError(true);
+	const { mutation, error, isLoading, isSuccess } = useCreateListMutation();
 
 	async function createList(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
 		if (title && title.trim().length > 3) {
-			try {
-				await StarsListCollection.create({
-					title,
-					description,
-					reposCount: 0,
-				});
-			} catch (err: any) {
-				setErrorMessage(err.message);
-			}
-		} else {
+			mutation({ title: title.trim(), description });
 		}
 	}
+
+	useEffect(() => {
+		if (isSuccess) {
+			window.location.reload();
+		}
+	}, [isSuccess]);
 
 	return (
 		<>
 			<Button onClick={() => setIsDialogOpen(true)} size="sm">
+				<Plus className="-mr-2" />
 				Create List
 			</Button>
 			<Dialog
@@ -63,14 +64,13 @@ export default function CreateListDialog() {
 						fullWidth
 						placeholder="Write a description"
 					/>
-					{errorMessage ? (
-						<span className="text-red-800 bg-red-500/10 px-4 rounded-md">
-							{errorMessage}
-						</span>
+					{error ? (
+						<Indicator message={error} type="error" />
 					) : null}
 					<Button
+						isLoading={isLoading}
 						role="button"
-						disabled={title === null || title.trim().length < 3}
+						disabled={title === null || title.trim().length < 3 || isLoading}
 						full
 					>
 						Create
