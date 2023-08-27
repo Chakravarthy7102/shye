@@ -1,3 +1,4 @@
+import Indicator from "@/ui/indicators";
 import { useCallback, useState } from "react";
 
 export default function useError(autoDisapper = false, duration = 3000) {
@@ -16,11 +17,7 @@ export default function useError(autoDisapper = false, duration = 3000) {
 	);
 
 	const ErrorMessage = useCallback(() => {
-		return error ? (
-			<span className="text-red-800 bg-red-500/10 px-4 rounded-md">
-				{error}
-			</span>
-		) : null;
+		return error ? <Indicator message={error} type="error" /> : null;
 	}, [error]);
 
 	return [ErrorMessage, setError] as const;
