@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useQuery<T>(_cb: () => Promise<T>) {
+	const [isSuccess, setIsSuccess] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [errorObject, setError] = useState<{
 		isError: boolean;
@@ -21,6 +22,7 @@ export default function useQuery<T>(_cb: () => Promise<T>) {
 			setIsLoading(true);
 			const res = await _cb();
 			setData(res);
+			setIsSuccess(true);
 		} catch (err) {
 			let message = "Something went wrong, Please try again.";
 			if (
@@ -45,5 +47,5 @@ export default function useQuery<T>(_cb: () => Promise<T>) {
 		_queryFn();
 	}, []);
 
-	return { data, ...errorObject, isLoading } as const;
+	return { data, ...errorObject, isLoading, isSuccess } as const;
 }

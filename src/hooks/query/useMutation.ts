@@ -7,6 +7,7 @@ type ErrorType = {
 
 export default function useMutation<T, V>(_cb: (params: V) => Promise<T>) {
 	const [isLoading, setIsLoading] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
 	const [errorObject, setError] = useState<ErrorType>({
 		isError: false,
 		error: null,
@@ -25,6 +26,7 @@ export default function useMutation<T, V>(_cb: (params: V) => Promise<T>) {
 			const res = await _cb(params);
 
 			setData(res);
+			setIsSuccess(true);
 		} catch (err) {
 			let message = "Something went wrong, Please try again.";
 
@@ -48,5 +50,5 @@ export default function useMutation<T, V>(_cb: (params: V) => Promise<T>) {
 		}
 	}
 
-	return { data, ...errorObject, isLoading, mutation } as const;
+	return { data, ...errorObject, isLoading, isSuccess, mutation } as const;
 }

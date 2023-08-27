@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "@/ui/button";
 import Dialog from "@/ui/dialog";
@@ -17,7 +17,7 @@ export default function CreateListDialog() {
 	const [title, setTitle] = useState<string | null>(null);
 	const [description, setDescription] = useState("");
 
-	const { error, isLoading, mutation } = useCreateListMutation();
+	const { mutation, error, isLoading, isSuccess } = useCreateListMutation();
 
 	async function createList(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -26,6 +26,12 @@ export default function CreateListDialog() {
 			mutation({ title: title.trim(), description });
 		}
 	}
+
+	useEffect(() => {
+		if (isSuccess) {
+			window.location.reload();
+		}
+	}, [isSuccess]);
 
 	return (
 		<>
@@ -59,7 +65,7 @@ export default function CreateListDialog() {
 						placeholder="Write a description"
 					/>
 					{error ? (
-						<Indicator message={error+error+error+error} type="error" />
+						<Indicator message={error} type="error" />
 					) : null}
 					<Button
 						isLoading={isLoading}
