@@ -7,7 +7,21 @@ module.exports = {
 		"./src/ui/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			animation: {
+				"fade-in": "fadeIn 250ms ease-in",
+			},
+			keyframes: {
+				fadeIn: {
+					"0%": {
+						opacity: 0,
+					},
+					"100%": {
+						opacity: 1,
+					},
+				},
+			},
+		},
 	},
 	plugins: [],
 };

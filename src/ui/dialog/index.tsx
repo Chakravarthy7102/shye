@@ -6,7 +6,6 @@ import { useRef, useEffect } from "react";
 type Props = {
 	title: string;
 	onClose: () => void;
-	onOk: () => void;
 	showDialog: boolean;
 	children: React.ReactNode;
 };
@@ -14,7 +13,6 @@ type Props = {
 export default function Dialog({
 	title,
 	onClose,
-	onOk,
 	children,
 	showDialog,
 }: Props) {
