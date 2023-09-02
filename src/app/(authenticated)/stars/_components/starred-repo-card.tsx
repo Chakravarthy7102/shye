@@ -20,7 +20,7 @@ export default function StarredRepoCard(repo: StarredRepository) {
 				<AddToListDropdownMenu />
 			</div>
 			<p className="text-zinc-400">{repo.description}</p>
-			<div className="flex gap-5 items-center text-sm text-zinc-400">
+			<div className="flex flex-wrap gap-5 items-center text-sm text-zinc-400">
 				{repo.language ? (
 					<div className="flex items-center gap-1">
 						<span

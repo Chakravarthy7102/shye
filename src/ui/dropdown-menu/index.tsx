@@ -1,3 +1,4 @@
+import classNames from "@/utils/className";
 import React, { createContext, useContext, useState } from "react";
 
 type DropdownMenuContextValue = {
@@ -24,10 +25,11 @@ function useDropdownMenuContext() {
 
 type DropdownMenuProps = {
 	children: React.ReactNode;
+	className?: string;
 };
 
 export function DropdownMenu(props: DropdownMenuProps) {
-	const { children } = props;
+	const { children, className = "" } = props;
 
 	const [isMenuOpen, setIsShowMenu] = useState(false);
 
@@ -41,7 +43,7 @@ export function DropdownMenu(props: DropdownMenuProps) {
 
 	return (
 		<DropdownMenuContext.Provider value={{ isMenuOpen, closeMenu, openMenu }}>
-			<div className="relative">{children}</div>
+			<div className={classNames("relative", className)}>{children}</div>
 		</DropdownMenuContext.Provider>
 	);
 }
@@ -71,6 +73,7 @@ type ExtraProps = (props: { closeMenu: () => void }) => React.ReactNode;
 
 type MenuContentProps = {
 	children: React.ReactNode | ExtraProps;
+	className?: string;
 	position?: Partial<{
 		top: string;
 		bottom: string;
@@ -82,6 +85,7 @@ type MenuContentProps = {
 export default function DropdownMenuContent({
 	children,
 	position,
+	className = "",
 }: MenuContentProps) {
 	const { isMenuOpen, closeMenu } = useDropdownMenuContext();
 
@@ -92,7 +96,10 @@ export default function DropdownMenuContent({
 	return (
 		<div
 			style={position}
-			className="absolute min-w-[12rem] max-h-52 overflow-auto no-scrollbar right-0 z-10 bg-zinc-950 border border-blue-500/20 rounded-md pt-5 pb-2 px-2 animate-fade-in shadow-2xl shadow-blue-950/50"
+			className={classNames(
+				"absolute min-w-[12rem] max-h-52 overflow-auto no-scrollbar right-0 z-10 bg-zinc-950 border border-blue-500/20 rounded-md pt-5 pb-2 px-2 animate-fade-in shadow-2xl shadow-blue-950/50",
+				className
+			)}
 		>
 			<div className="fixed inset-0 z-[-1]" onClick={closeMenu} />
 			{typeof children === "function" ? children({ closeMenu }) : children}
