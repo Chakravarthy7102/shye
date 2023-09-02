@@ -49,7 +49,7 @@ export type ButtonProps = (
 	InferredVariantProps;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	({ color, size, full, children, ...props }, forwardedRef) => {
+	({ color, size, full, children, isLoading, ...props }, forwardedRef) => {
 		const elementType = props.href === undefined ? "button" : "a";
 
 		const element = createElement(
@@ -60,9 +60,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				className: classNames(button({ color, size, full }), props.className),
 			},
 			<>
-				{props.isLoading ? (
-					<Loader className="animate-spin h-5 w-5 -mr-2" />
-				) : null}
+				{isLoading ? <Loader className="animate-spin h-5 w-5 -mr-2" /> : null}
 				{children}
 			</>
 		);

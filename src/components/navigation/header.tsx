@@ -24,20 +24,20 @@ export default function Header({ session }: { session: Session }) {
 				<Link
 					className={classNames(
 						"hover:underline underline-offset-4",
-						pathname === "/lists" ? "underline font-semibold" : undefined
-					)}
-					href="/lists"
-				>
-					Lists
-				</Link>
-				<Link
-					className={classNames(
-						"hover:underline underline-offset-4",
 						pathname === "/stars" ? "underline font-semibold" : undefined
 					)}
 					href="/stars"
 				>
 					Stars
+				</Link>
+				<Link
+					className={classNames(
+						"hover:underline underline-offset-4",
+						pathname === "/lists" ? "underline font-semibold" : undefined
+					)}
+					href="/lists"
+				>
+					Lists
 				</Link>
 			</div>
 			<div className="flex items-center gap-4">
