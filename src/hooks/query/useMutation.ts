@@ -44,7 +44,7 @@ export default function useMutation<T, V>(_cb: (params: V) => Promise<T>) {
 				error: message,
 			});
 
-			console.error(err);
+			throw err;
 		} finally {
 			setIsLoading(false);
 		}

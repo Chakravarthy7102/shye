@@ -10,6 +10,7 @@ import { Plus } from "@/lib/icons";
 import Indicator from "@/ui/indicators";
 
 import { useCreateListMutation } from "../../_lib";
+import toast from "react-hot-toast";
 
 export default function CreateListDialog() {
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -23,8 +24,16 @@ export default function CreateListDialog() {
 		e.preventDefault();
 
 		if (title && title.trim().length > 3) {
-			mutation({ title: title.trim(), description });
+			try {
+				await mutation({ title: title.trim(), description });
+				toast.success("A new list created!");
+				closeDialog();
+			} catch (_) {}
 		}
+	}
+
+	function closeDialog() {
+		setIsDialogOpen(false);
 	}
 
 	useEffect(() => {
@@ -40,10 +49,7 @@ export default function CreateListDialog() {
 				Create List
 			</Button>
 			<Dialog
-				onClose={() => setIsDialogOpen(false)}
-				onOk={() => {
-					setIsDialogOpen(false);
-				}}
+				onClose={closeDialog}
 				showDialog={isDialogOpen}
 				title="Create list"
 			>
@@ -64,9 +70,7 @@ export default function CreateListDialog() {
 						fullWidth
 						placeholder="Write a description"
 					/>
-					{error ? (
-						<Indicator message={error} type="error" />
-					) : null}
+					{error ? <Indicator message={error} type="error" /> : null}
 					<Button
 						isLoading={isLoading}
 						role="button"

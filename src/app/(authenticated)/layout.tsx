@@ -7,6 +7,7 @@ import Footer from "@/components/navigation/footer";
 import Header from "@/components/navigation/header";
 
 import RootLayout from "../layout";
+import { Toaster } from "react-hot-toast";
 
 export default async function AuthenticatedLayout({
 	children,
@@ -24,6 +25,7 @@ export default async function AuthenticatedLayout({
 			<AuthContext session={session}>
 				<Header session={session} />
 				<main className="max-w-5xl mx-auto pt-24">{children}</main>
+				<Toaster position="bottom-center" />
 			</AuthContext>
 			<Footer />
 		</RootLayout>

@@ -4,6 +4,7 @@ import { db } from "../index";
 
 export type StarsListItem = Omit<StarredRepository, "id"> & {
 	id?: number;
+	githubId: number;
 	starListId: number;
 };
 

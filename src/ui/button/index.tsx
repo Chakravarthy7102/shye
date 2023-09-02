@@ -17,7 +17,7 @@ const button = cva(
 			color: {
 				primary: "bg-zinc-200 text-zinc-900 shadow-md shadow-zinc-500",
 				secondary: "bg-zinc-900 text-zinc-200 shadow-md shadow-zinc-800",
-				muted: "bg-transparent shadow-none",
+				muted: "bg-transparent hover:bg-zinc-900 shadow-none",
 			},
 			full: {
 				true: "w-full",
@@ -49,7 +49,7 @@ export type ButtonProps = (
 	InferredVariantProps;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-	({ color, size, full, children, ...props }, forwardedRef) => {
+	({ color, size, full, children, isLoading, ...props }, forwardedRef) => {
 		const elementType = props.href === undefined ? "button" : "a";
 
 		const element = createElement(
@@ -60,9 +60,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				className: classNames(button({ color, size, full }), props.className),
 			},
 			<>
-				{props.isLoading ? (
-					<Loader className="animate-spin h-5 w-5 -mr-2" />
-				) : null}
+				{isLoading ? <Loader className="animate-spin h-5 w-5 -mr-2" /> : null}
 				{children}
 			</>
 		);
