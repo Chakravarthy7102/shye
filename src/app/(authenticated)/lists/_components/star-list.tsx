@@ -4,7 +4,7 @@ import Link from "next/link";
 type StarsListProps = StarsList;
 
 export default function StarList(props: StarsListProps) {
-	const { reposCount, title, description, id } = props;
+	const { title, description, id } = props;
 	return (
 		<Link
 			href={`/lists/${id}/${title.toLowerCase()}`}
@@ -16,9 +16,6 @@ export default function StarList(props: StarsListProps) {
 			<p className="text-zinc-400 m-0 whitespace-nowrap overflow-hidden text-ellipsis">
 				{description}
 			</p>
-			<span className="block text-sm text-zinc-400 mt-10">
-				{reposCount} repository
-			</span>
 		</Link>
 	);
 }

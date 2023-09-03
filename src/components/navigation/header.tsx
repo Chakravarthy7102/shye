@@ -61,6 +61,7 @@ export default function Header({ session }: { session: Session }) {
 					Sign Out
 				</Button>
 				<Button
+					color="danger"
 					size="sm"
 					onClick={async () => {
 						await resetDatabase();

@@ -1,12 +1,13 @@
 {
 	"name": "shye",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"ts-lint": "tsc --noEmit --incremental --watch"
 	},
 	"dependencies": {
 		"autoprefixer": "10.4.14",

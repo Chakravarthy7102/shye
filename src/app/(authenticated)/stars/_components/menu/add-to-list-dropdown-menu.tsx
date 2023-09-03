@@ -45,7 +45,13 @@ export default function AddToListDropdownMenu({
 							) : null}
 							{lists &&
 								lists.map((list) => {
-									return <AddToListDropdownItem list={list} repo={repo} />;
+									return (
+										<AddToListDropdownItem
+											key={list.id}
+											list={list}
+											repo={repo}
+										/>
+									);
 								})}
 							<CreateListDialog
 								customTrigger={({ openDialog }) => {

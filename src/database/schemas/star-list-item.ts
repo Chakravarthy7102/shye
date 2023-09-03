@@ -1,6 +1,7 @@
 import { StarredRepository } from "@/types/github";
 
 import { db } from "../index";
+import { StarsList } from "./star-list";
 
 export type StarsListItem = Omit<StarredRepository, "id"> & {
 	//this id is relevant to shye context
@@ -31,8 +32,9 @@ export default class StarListItemCollection {
 		await db.starsList
 			.where("id")
 			.equals(list.starListId)
-			.modify((list) => {
+			.modify((list: StarsList) => {
 				list = { ...list, reposCount: list.reposCount + 1 };
+				return list;
 			});
 		return db.starListItem.add(list);
 	}

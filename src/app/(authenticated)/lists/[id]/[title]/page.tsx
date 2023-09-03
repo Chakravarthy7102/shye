@@ -5,16 +5,29 @@ import { Plus } from "@/lib/icons";
 import Spinner from "@/components/spinner";
 import Button from "@/ui/button";
 
-import { useGetStarListItems } from "../../_lib";
+import { useGetStarList, useGetStarListItemsByListId } from "../../_lib";
+import StarredRepoCard from "@/app/(authenticated)/stars/_components/starred-repo-card";
+import { useParams, useSearchParams } from "next/navigation";
+import Pagination from "@/app/(authenticated)/stars/_components/pagination";
 
 export default function StarsListPage() {
-	const { data, error, isLoading } = useGetStarListItems();
+	const params = useParams();
+	const searchParams = useSearchParams();
+	const listId = Number(params.id);
+	const page = Number(searchParams.get("page") || 1);
 
-	if (isLoading && data === undefined) {
+	const {
+		data: listItems,
+		error,
+		isLoading,
+	} = useGetStarListItemsByListId(listId);
+	const { data: list } = useGetStarList(listId);
+
+	if (isLoading && listItems === undefined) {
 		return <Spinner />;
 	}
 
-	if (error || data === undefined) {
+	if (error || listItems === undefined || listItems.length < 1) {
 		return (
 			<section className="h-screen px-10 ">
 				<div className="flex justify-between items-center mb-5">
@@ -39,4 +52,21 @@ export default function StarsListPage() {
 			</section>
 		);
 	}
+
+	return (
+		<section className="px-10">
+			<div className="mt-5 mb-10">
+				<h1 className="text-3xl font-bold capitalize">{list?.title}</h1>
+				<p className="mt-3">{list?.description}</p>
+			</div>
+			<div className="flex flex-col gap-8 pb-10">
+				{listItems.map((repo) => {
+					return (
+						<StarredRepoCard key={repo.created_at} id={repo.id!} {...repo} />
+					);
+				})}
+				<Pagination page={page} result={listItems.length} />
+			</div>
+		</section>
+	);
 }
