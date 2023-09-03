@@ -5,7 +5,7 @@ import { Fork, Star } from "@/lib/icons";
 import Button from "@/ui/button";
 import { StarredRepository } from "@/types/github";
 
-import AddToListDropdownMenu from "./add-to-list-dropdown-menu";
+import AddToListDropdownMenu from "./menu/add-to-list-dropdown-menu";
 
 export default function StarredRepoCard(repo: StarredRepository) {
 	return (
