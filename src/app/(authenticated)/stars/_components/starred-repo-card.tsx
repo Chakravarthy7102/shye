@@ -5,7 +5,6 @@ import { Fork, Star } from "@/lib/icons";
 import Button from "@/ui/button";
 import { StarredRepository } from "@/types/github";
 
-
 import AddToListDropdownMenu from "./add-to-list-dropdown-menu";
 
 export default function StarredRepoCard(repo: StarredRepository) {
@@ -17,7 +16,7 @@ export default function StarredRepoCard(repo: StarredRepository) {
 						{repo.owner.login} / {repo.name}
 					</Link>
 				</h4>
-				<AddToListDropdownMenu />
+				<AddToListDropdownMenu repo={repo} />
 			</div>
 			<p className="text-zinc-400">{repo.description}</p>
 			<div className="flex flex-wrap gap-5 items-center text-sm text-zinc-400">

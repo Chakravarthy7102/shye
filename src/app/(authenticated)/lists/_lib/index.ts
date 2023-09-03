@@ -1,5 +1,7 @@
 import StarsListCollection from "@/database/schemas/star-list";
-import StarListItemCollection from "@/database/schemas/star-list-item";
+import StarListItemCollection, {
+	FindByFilter,
+} from "@/database/schemas/star-list-item";
 
 import useMutation from "@/hooks/query/useMutation";
 import useQuery from "@/hooks/query/useQuery";

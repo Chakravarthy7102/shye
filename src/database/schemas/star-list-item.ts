@@ -11,28 +11,41 @@ export type StarsListItem = Omit<StarredRepository, "id"> & {
 	starListId: number;
 };
 
-type FindByFilter = Partial<StarsListItem>;
+export type FindByFilter = Partial<StarsListItem>;
 
 export default class StarListItemCollection {
 	public static findAll() {
-		return db.starsListItem.toArray();
+		return db.starListItem.toArray();
 	}
 
 	public static findBy(filter: FindByFilter) {
-		return db.starsListItem.where({ ...filter });
+		return db.starListItem.where({ ...filter });
 	}
 
 	public static findOne(filter: FindByFilter) {
-		return db.starsListItem.where({ ...filter }).first();
+		return db.starListItem.where({ ...filter }).first();
 	}
 
 	public static async create(list: StarsListItem) {
+		//increse the no.of items that are inside of the stars list.
 		await db.starsList
 			.where("id")
 			.equals(list.starListId)
 			.modify((list) => {
 				list = { ...list, reposCount: list.reposCount + 1 };
 			});
-		return db.starsListItem.add(list);
+		return db.starListItem.add(list);
+	}
+
+	public static async delete(starListId: number) {
+		//decrese the no.of items that are inside of the stars list.
+		await db.starsList
+			.where("id")
+			.equals(starListId)
+			.modify((list) => {
+				list = { ...list, reposCount: list.reposCount - 1 };
+			});
+
+		return db.starListItem.where("starListId").equals(starListId).delete();
 	}
 }
