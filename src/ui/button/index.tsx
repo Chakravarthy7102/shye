@@ -18,6 +18,8 @@ const button = cva(
 				primary: "bg-zinc-200 text-zinc-900 shadow-md shadow-zinc-500",
 				secondary: "bg-zinc-900 text-zinc-200 shadow-md shadow-zinc-800",
 				muted: "bg-transparent hover:bg-zinc-900 shadow-none",
+				danger:
+					"bg-red-700 text-zinc-200 shadow-md shadow-red-900/50",
 			},
 			full: {
 				true: "w-full",
@@ -74,5 +76,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 		);
 	}
 );
+
+Button.displayName = 'Button'
 
 export default Button;

@@ -25,7 +25,6 @@ export default function AddToListDropdownItem({ list, repo }: ListItemProps) {
 			);
 			isPartOfThisList = currentRepoInstance
 				.map((itemInstaces) => {
-					console.log(itemInstaces.starListId);
 					return itemInstaces.starListId;
 				})
 				.includes(list.id);
@@ -38,9 +37,10 @@ export default function AddToListDropdownItem({ list, repo }: ListItemProps) {
 
 	async function addToList() {
 		try {
+			const { id: githubRepoId, ...rest } = repo;
 			await StarListItemCollection.create({
-				...repo,
-				githubRepoId: repo.id,
+				...rest,
+				githubRepoId,
 				starListId: list.id!,
 			});
 			setChecked(true);

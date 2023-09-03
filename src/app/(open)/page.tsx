@@ -72,7 +72,7 @@ export default function Home() {
 					</h2>
 					<div className="grid grid-cols-3 grid-rows-1 gap-5 mt-10">
 						{features.map((feature) => (
-							<LandingCard {...feature} />
+							<LandingCard key={feature.title} {...feature} />
 						))}
 					</div>
 				</div>
@@ -84,7 +84,7 @@ export default function Home() {
 					</h2>
 					<div className="grid grid-cols-3 grid-rows-1 gap-5 mt-10">
 						{steps.map((step) => (
-							<LandingCard {...step} />
+							<LandingCard key={step.title} {...step} />
 						))}
 					</div>
 				</div>

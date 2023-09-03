@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 import { Github } from "@/lib/icons";
 import Button from "@/ui/button";
-import Database from "@/database";
 import { signIn } from "next-auth/react";
 
 type AuthMode = "signin" | "signup";
@@ -26,8 +25,6 @@ const textConfig = {
 
 export function GithubAuth() {
 	const [authMode, setAuthMode] = useState<AuthMode>("signin");
-
-	async function handleGithubAuth() {}
 
 	return (
 		<>

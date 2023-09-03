@@ -21,7 +21,7 @@ export default function Lists() {
 					</div>
 					<div className="grid lg:grid-cols-2 sm:grid-cols-1 gap-4 mt-24">
 						{lists.map((list) => {
-							return <StarList {...list} />;
+							return <StarList key={list.id} {...list} />;
 						})}
 					</div>
 				</div>

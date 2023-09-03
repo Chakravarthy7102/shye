@@ -13,11 +13,12 @@ export default function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
-	session: Session | null;
+	session?: Session | null;
 }) {
 	return (
 		<html lang="en">
 			<body
+				suppressHydrationWarning={true}
 				className={
 					inter.className +
 					" bg-gradient-to-br from-zinc-950 via-zinc-950 to-blue-950 h-screen text-zinc-200 bg-no-repeat bg-fixed"
