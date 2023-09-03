@@ -10,7 +10,7 @@ export class ShyeDatabase extends Dexie {
 		super("ShyeDb");
 		this.version(1).stores({
 			starsList: "++id,title",
-			starListItem: "++id,starListId",
+			starListItem: "++id,starListId,githubRepoId",
 		});
 	}
 }

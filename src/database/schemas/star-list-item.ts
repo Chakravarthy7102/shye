@@ -3,8 +3,11 @@ import { StarredRepository } from "@/types/github";
 import { db } from "../index";
 
 export type StarsListItem = Omit<StarredRepository, "id"> & {
+	//this id is relevant to shye context
 	id?: number;
-	githubId: number;
+	//id of the repository on the github database.
+	githubRepoId: number;
+	//id the of the list that this repo is assoicated with.
 	starListId: number;
 };
 
