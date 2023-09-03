@@ -4,13 +4,13 @@ import { StarsListItem } from "./schemas/star-list-item";
 
 export class ShyeDatabase extends Dexie {
 	starsList!: Table<StarsList, number>;
-	starsListItem!: Table<StarsListItem, number>;
+	starListItem!: Table<StarsListItem, number>;
 
 	constructor() {
 		super("ShyeDb");
 		this.version(1).stores({
 			starsList: "++id,title",
-			starListItem: "++id,starListId",
+			starListItem: "++id,starListId,githubRepoId",
 		});
 	}
 }

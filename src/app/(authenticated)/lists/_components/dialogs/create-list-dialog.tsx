@@ -12,7 +12,11 @@ import Indicator from "@/ui/indicators";
 import { useCreateListMutation } from "../../_lib";
 import toast from "react-hot-toast";
 
-export default function CreateListDialog() {
+type CreateListDialogProps = {
+	customTrigger?: (params: { openDialog: () => void }) => React.ReactNode;
+};
+
+export default function CreateListDialog(props: CreateListDialogProps) {
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
 	const [title, setTitle] = useState<string | null>(null);
@@ -36,6 +40,10 @@ export default function CreateListDialog() {
 		setIsDialogOpen(false);
 	}
 
+	function openDialog() {
+		setIsDialogOpen(true);
+	}
+
 	useEffect(() => {
 		if (isSuccess) {
 			window.location.reload();
@@ -44,10 +52,14 @@ export default function CreateListDialog() {
 
 	return (
 		<>
-			<Button onClick={() => setIsDialogOpen(true)} size="sm">
-				<Plus className="-mr-2" />
-				Create List
-			</Button>
+			{props.customTrigger ? (
+				props.customTrigger({ openDialog })
+			) : (
+				<Button onClick={openDialog} size="sm">
+					<Plus className="-mr-2" />
+					Create List
+				</Button>
+			)}
 			<Dialog
 				onClose={closeDialog}
 				showDialog={isDialogOpen}

@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { Toaster } from "react-hot-toast";
 
 import AuthContext from "@/context/AuthContext";
 import getSession from "@/utils/getSession";
@@ -7,7 +8,6 @@ import Footer from "@/components/navigation/footer";
 import Header from "@/components/navigation/header";
 
 import RootLayout from "../layout";
-import { Toaster } from "react-hot-toast";
 
 export default async function AuthenticatedLayout({
 	children,

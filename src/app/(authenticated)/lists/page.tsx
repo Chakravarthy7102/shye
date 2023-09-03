@@ -28,7 +28,7 @@ export default function Lists() {
 			) : null}
 			{lists && lists.length === 0 ? (
 				<div className="flex flex-col gap-5 justify-center items-center h-[calc(100vh-8rem)] ">
-					<p className="font-semibold text-xl">
+					<p className="font-semibold text-xl text-center">
 						No lists are found, get started by creating new lists.
 					</p>
 					<CreateListDialog />
