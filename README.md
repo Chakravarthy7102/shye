@@ -41,7 +41,7 @@ npm run dev
 
 ## Tech Stack
 
-Novel is built on the following stack:
+Shye is built on the following stack:
 
 - [Next.js](https://nextjs.org/) – framework
 - [Vercel](https://vercel.com) – deployments
